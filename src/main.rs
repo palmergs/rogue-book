@@ -7,6 +7,9 @@ mod cameras;
 
 pub mod prelude {
     pub use bracket_lib::prelude::*;
+    pub use legion::*;
+    pub use legion::world::SubWorld;
+    pub use legion::systems::CommandBuffer;
     pub use crate::maps::*;
     pub use crate::map_builders::*;
     pub use crate::players::*;
