@@ -40,6 +40,11 @@ impl State {
         let mut rng = RandomNumberGenerator::new();
         let map_builder = MapBuilder::build(&mut rng);
         spawn_player(&mut ecs, map_builder.player_start);
+        map_builder.rooms
+            .iter()
+            .skip(1)
+            .map(|r| r.center())
+            .for_each(|pos| spawn_monster(&mut ecs, &mut rng, pos));
         
         resources.insert(map_builder.map);
         resources.insert(Camera::new(map_builder.player_start));
@@ -50,14 +55,13 @@ impl State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
+        ctx.set_active_console(0);
+        ctx.cls();
+        ctx.set_active_console(1);
+        ctx.cls();
         self.resources.insert(ctx.key);
         self.systems.execute(&mut self.ecs, &mut self.resources);
         render_draw_buffer(ctx).expect("render error from draw buffer");
-
-        // ctx.set_active_console(0);
-        // ctx.cls();
-        // ctx.set_active_console(1);
-        // ctx.cls();
     }
 }
 
