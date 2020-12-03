@@ -16,7 +16,7 @@ pub fn spawn_player(ecs: &mut World, pos: Point) {
 pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Point) {
     ecs.push(
         (
-            Enemy,
+            Enemy{},
             pos,
             Render{
                 color: ColorPair::new(RGB::named(WHITE), RGB::named(BLACK)),
@@ -26,7 +26,8 @@ pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Poin
                     2 => to_cp437('o'),
                     _ => to_cp437('g'),
                 }
-            }
+            },
+            MovingRandomly{}
         )
     );
 }
