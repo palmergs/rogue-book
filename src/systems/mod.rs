@@ -15,6 +15,7 @@ pub fn build_input_scheduler() -> Schedule {
         .flush()
         .add_system(map_render::map_render_system())
         .add_system(entity_render::entity_render_system())
+        .add_system(hud::hud_system())
         .build()
 }
 
