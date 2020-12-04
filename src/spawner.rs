@@ -9,7 +9,7 @@ pub fn spawn_player(ecs: &mut World, pos: Point) {
                 color: ColorPair::new(RGB::named(WHITE), RGB::named(BLACK)), 
                 glyph: to_cp437('@') 
             },
-            Health{ current: 20, max: 20 }
+            Health{ current: 10, max: 10 }
         )
     );
 }
@@ -23,16 +23,24 @@ pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Poin
     };
 
     let color = ColorPair::new(RGB::named(WHITE), RGB::named(BLACK));
-    ecs.push(
-        (
-            Enemy,
+    match rng.roll_dice(1, 4) {
+        1 => ecs.push((
+            Enemy{},
             pos,
             Render{color, glyph},
-            MovingRandomly,
             Health{ current: hp, max: hp },
             Name(name),
-        )
-    );
+            MovingRandomly{}
+        )),
+        _ => ecs.push((
+            Enemy{},
+            pos,
+            Render{color, glyph},
+            Health{ current: hp, max: hp },
+            Name(name),
+            ChasingPlayer{}
+        ))
+    };
 }
 
 fn goblin() -> (i32, String, FontCharType) {
