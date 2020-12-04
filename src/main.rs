@@ -67,16 +67,16 @@ impl State {
 
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
-        ctx.set_active_console(0);
+        ctx.set_active_console(2);
         ctx.cls();
         ctx.set_active_console(1);
-        ctx.cls();
-        ctx.set_active_console(2);
-        self.resources.insert(ctx.key);
-        
+        ctx.cls();        
         ctx.set_active_console(0);
-        self.resources.insert(Point::from_tuple(ctx.mouse_pos()));
+        ctx.cls();
         
+        self.resources.insert(ctx.key);
+        self.resources.insert(Point::from_tuple(ctx.mouse_pos()));
+
         let curr_state = self.resources.get::<TurnState>().unwrap().clone();
         match curr_state {
             TurnState::AwaitingInput => self.input_systems.execute(&mut self.ecs, &mut self.resources),
