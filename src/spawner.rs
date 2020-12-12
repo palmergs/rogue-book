@@ -9,9 +9,19 @@ pub fn spawn_player(ecs: &mut World, pos: Point) {
                 color: ColorPair::new(RGB::named(WHITE), RGB::named(BLACK)), 
                 glyph: to_cp437('@') 
             },
-            Health{ current: 10, max: 10 }
+            Health{ current: 100, max: 100 }
         )
     );
+}
+
+pub fn spawn_amulet_of_yala(ecs: &mut World, pos: Point) {
+    ecs.push((
+        Item{},
+        AmuletOfYala{},
+        pos,
+        Render{color: ColorPair::new(WHITE, BLACK), glyph: to_cp437('&')},
+        Name("Amulet of Yala".to_string()),
+    ));
 }
 
 pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Point) {
@@ -48,13 +58,13 @@ fn goblin() -> (i32, String, FontCharType) {
 }
 
 fn orc() -> (i32, String, FontCharType) {
-    (10, "Orc".to_string(), to_cp437('o'))
+    (8, "Orc".to_string(), to_cp437('o'))
 }
 
 fn ogre() -> (i32, String, FontCharType) {
-    (30, "Ogre".to_string(), to_cp437('O'))
+    (15, "Ogre".to_string(), to_cp437('O'))
 }
 
 fn ettin() -> (i32, String, FontCharType) {
-    (50, "Ettin".to_string(), to_cp437('E'))
+    (25, "Ettin".to_string(), to_cp437('E'))
 }

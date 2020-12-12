@@ -13,6 +13,12 @@ pub struct Player;
 pub struct Enemy;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
+pub struct Item;
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct AmuletOfYala;
+
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct MovingRandomly;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
