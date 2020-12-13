@@ -79,6 +79,10 @@ impl BaseMap for Map {
 
         exits
     }
+
+    fn is_opaque(&self, idx: usize) -> bool {
+        self.tiles[idx] != TileType::Floor
+    }
 }
 
 impl Algorithm2D for Map {

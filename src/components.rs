@@ -1,5 +1,7 @@
 pub use crate::prelude::*;
 
+use std::collections::HashSet;
+
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Render {
     pub color: ColorPair,
@@ -44,3 +46,22 @@ pub struct Health {
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Name(pub String);
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct FieldOfView{
+    pub visible_tiles: HashSet<Point>,
+    pub radius: i32,
+    pub is_dirty: bool
+}
+
+impl FieldOfView {
+    pub fn new(radius: i32) -> Self {
+        Self{ visible_tiles: HashSet::new(), radius, is_dirty: true }
+    }
+
+    pub fn clone_dirty(&self) -> Self {
+        let mut cloned = self.clone();
+        cloned.is_dirty = true;
+        cloned
+    }
+}
