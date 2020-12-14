@@ -1,6 +1,9 @@
 use crate::prelude::*;
 
-const NUM_TILES: usize = (SCREEN_WIDTH * SCREEN_HEIGHT) as usize;
+pub const MAP_WIDTH: i32 = 80;
+pub const MAP_HEIGHT: i32 = 50;
+
+const NUM_TILES: usize = (MAP_WIDTH * MAP_HEIGHT) as usize;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum TileType {
@@ -22,7 +25,7 @@ impl Map {
     }
 
     pub fn in_bounds(&self, point: Point) -> bool {
-        point.x >= 0 && point.x < SCREEN_WIDTH && point.y >= 0 && point.y < SCREEN_HEIGHT
+        point.x >= 0 && point.x < MAP_WIDTH && point.y >= 0 && point.y < MAP_HEIGHT
     }
 
     pub fn can_enter(&self, point: Point) -> bool {
@@ -55,7 +58,7 @@ impl Map {
     }
 
     pub fn to_index(x: i32, y: i32) -> usize {
-        ((y * SCREEN_WIDTH) + x) as usize
+        ((y * MAP_WIDTH) + x) as usize
     }
 }
 
@@ -89,7 +92,7 @@ impl BaseMap for Map {
 
 impl Algorithm2D for Map {
     fn dimensions(&self) -> Point {
-        Point::new(SCREEN_WIDTH, SCREEN_HEIGHT)
+        Point::new(MAP_WIDTH, MAP_HEIGHT)
     }
 }
 

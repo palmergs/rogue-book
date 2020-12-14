@@ -18,8 +18,8 @@ pub fn chasing(
     let player_idx = Map::to_index(player_pos.x, player_pos.y);
     let search_targets = vec![player_idx];
     let dijkstra_map = DijkstraMap::new(
-        SCREEN_WIDTH,
-        SCREEN_HEIGHT,
+        MAP_WIDTH,
+        MAP_HEIGHT,
         &search_targets,
         map,
         1024.0);
